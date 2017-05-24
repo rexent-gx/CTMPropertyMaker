@@ -1,0 +1,54 @@
+<html>
+<head>
+     <title>CTM Property Maker</title>
+</head>
+<body>
+<script type="text/javascript">
+	function MethodChange(){
+		if(document.getElementById('id_method')){
+			method = document.getElementById('id_method').value;
+
+			if(method == 'random'){
+				document.getElementById('random').style.display = "";
+				document.getElementById('repeat').style.display = "none";
+			}else if(method == 'repeat'){
+				document.getElementById('random').style.display = "none";
+				document.getElementById('repeat').style.display = "";
+			} else {
+				document.getElementById('random').style.display = "none";
+				document.getElementById('repeat').style.display = "none";
+			}
+		}
+        document.getElementById('submitbtn').disabled = true;
+        interval = setInterval(BtnInterval , 5000);
+	}
+    function BtnInterval(){
+        document.getElementById('submitbtn').disabled = false;
+        clearInterval(interval)
+    }
+window.onload = MethodChange;
+</script>
+<h1>CTM Property Maker</h1>
+<form action="" method="POST">{% csrf_token %}
+    <div class="setup">
+        {{setup.as_p}}
+    </div>
+    <div class="method">
+        {{method.as_p}}
+    </div>
+    <div id="random">
+        {{random.as_p}}
+    </div>
+    <div id="repeat">
+        {{repeat.as_p}}
+        <div>
+            {{ jadou }}
+        </div>
+    </div>
+    <div class="optional">
+        {{optional.as_p}}
+    </div>
+     <input type="submit" id="submitbtn" value="Submit" onsubmit="return false;"/>
+</form>
+</body>
+</html>
