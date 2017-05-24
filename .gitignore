@@ -1,0 +1,5 @@
+generated/
+manage.log
+manage.py
+propmaker_uwsgi.ini
+propmaker/settings.py
