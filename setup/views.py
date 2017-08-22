@@ -52,8 +52,6 @@ def jadouwritedown(request, path, jpath):
 			for x in range(l):
 				w = alpha[x]
 				filelist.append(w)
-#		for l in filelist:
-#			print(l)
 	#親プロパティマッチタイル書き込み
 	#ループカウンタ
 	loc = 0
@@ -115,7 +113,6 @@ def jadouwritedown(request, path, jpath):
 				t += alpha[tmpcnt]
 				temp[l] = t
 				tmpcnt = 0
-
 	#一時配列
 	templnums = []
 	#最終項以外の積*最終項分の配列を作成、一時配列に順番に番号を入れる
@@ -131,7 +128,6 @@ def jadouwritedown(request, path, jpath):
 	for m in range(times):
 		for n in range(int(jnums[jnumsc-1])):
 			childarr.append(n)
-
 	#子プロパティの番号
 	pcount = 0
 	for l in temp:
@@ -185,17 +181,14 @@ def rendform(request):
 			e = os.path.exists('generated/'+d)
 			n+=1
 		os.makedirs('generated/'+d)
-
 		#ファイル作成
 		w = request.POST['file_name']
 		#ファイルネームを決定し、ファイルパスを指定
 		path = 'generated/'+d+'/'+w+'.properties'
 		jpath = 'generated/'+d+'/'
 		f = open(path, 'w')
-
 		#ファイルにフォームデータ書き込み
 		listwritedown(request, path, 'tiles', 'method')
-
 		#methodがrandomとrepeatの時に応じた書き込み　一致しない時は無視
 		if request.POST['method'] == 'random':
 			listwritedown(request, path, 'weight', 'linked', 'symmetry')
@@ -204,12 +197,10 @@ def rendform(request):
 			if request.POST['jnums'] != '':
 				jadouwritedown(request, path, jpath)
 				jflag = True
-
 		#オプション項目書き込み
 		optwritedown(request, path, 'source', 'metadata', 'faces', 'matchtiles', 'biomes', 'minheight', 'maxheight', 'matchblocks', 'connect', 'renderpass')
 		#ファイルを閉じる
 		f.close()
-
 		#更新後にダイアログが出るようにする（頭いい方法募集）
 		sleep(0.1)
 		#作成したファイルをHttpResponseで返してダウンロードダイアログを表示させる
